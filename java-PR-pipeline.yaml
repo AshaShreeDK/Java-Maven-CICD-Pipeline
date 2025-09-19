@@ -1,0 +1,18 @@
+pr:
+- master
+pool:
+  vmImage: ubuntu-latest
+steps:
+- task: Maven@4
+  displayName: "PR Validation - Build & Test"
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'clean verify'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
+
